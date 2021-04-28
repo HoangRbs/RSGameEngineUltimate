@@ -9,7 +9,7 @@ export default class TestGame extends RSGameEngine {
         super();
     }
 
-    onCreate() {
+    OnCreate() {
         this.paddle = new Paddle(this.m_canvasWidth, this.m_canvasHeight, this);
         new InputHandler(this.paddle);
         this.ball = new Ball(this);
@@ -20,7 +20,6 @@ export default class TestGame extends RSGameEngine {
         ]
     }
 
-    // overrided functions
     Update(deltaTime) {
         this.gameObjects.forEach(ob => ob.update(deltaTime));
     }

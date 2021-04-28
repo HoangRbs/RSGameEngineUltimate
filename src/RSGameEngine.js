@@ -99,7 +99,7 @@ export default class RSGameEngine {
     };
 
     // game create object and resouces
-    onCreate() {
+    OnCreate() {
         throw new Error('You have to implement the method onCreate()!');
     }
     // -----------------------------------------------------------------------------------------
