@@ -10,16 +10,19 @@ export default class TestGame extends RSGameEngine {
         super();
     }
 
+    OnCreate() {
 
-    // overrided functions
+        this.gameObjects = [
+            
+        ]
+    }
+
     Update(deltaTime) {
-        super.update();
-        console.log(" Test Game update ");
+        this.gameObjects.forEach(ob => ob.update(deltaTime));
     }
 
     Render() {
-        super.render();
-        console.log(" Test Game render");
+        this.gameObjects.forEach(ob => ob.render());
     }
 }
 
@@ -75,6 +78,9 @@ export default class RSGameEngine {
 
         this.m_ctx.clearRect(0, 0, this.m_canvasWidth, this.m_canvasHeight);
 
+        // the incease in value like position or velocity must multiply DELTA TIME
+        // the purpose of delta time is used in more powerful machine and weaker machine 
+        // but the movement of vel/pos still perform the same
         this.Update(this.deltaTime);
         this.Render();
 
@@ -82,7 +88,7 @@ export default class RSGameEngine {
     }
 
     Start() {
-        this.onCreate();
+        this.OnCreate();
 
         // start the game loop
         window.requestAnimationFrame(this.GameLoop.bind(this));
@@ -109,7 +115,18 @@ export default class RSGameEngine {
     }
 
     FillRect(x, y, w, h, color = '#00f') {
-        this.m_ctx.fillStyle = '#00f';
+        this.m_ctx.fillStyle = color;
         this.m_ctx.fillRect(x, y, w, h);
+    }
+
+    // angle must be radian
+    Rotate(x, y, w, h, angle) {
+        let center_x = x + w / 2;
+        let center_y = y + h / 2;
+
+        // Matrix transformation
+        this.m_ctx.translate(center_x, center_y);
+        this.m_ctx.rotate(angle);
+        this.m_ctx.translate(-center_x, -center_y);
     }
 }

@@ -1,4 +1,5 @@
 import RSGameEngine from '../RSGameEngine';
+import Rocket from './Rocket';
 
 export default class TestGame extends RSGameEngine {
     constructor() {
@@ -6,9 +7,10 @@ export default class TestGame extends RSGameEngine {
     }
 
     OnCreate() {
+        this.testRocket = new Rocket(this.m_canvasWidth / 2, this.m_canvasHeight - 40, this);
 
         this.gameObjects = [
-
+            this.testRocket
         ]
     }
 

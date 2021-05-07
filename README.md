@@ -17,4 +17,8 @@ npm run build
 ```
 
 ## Quick Note
-This boilerplate assumes your app code lives in /src.
+This boilerplate assumes all your app code lives in /src.
+
+
+# RSGameEngineJS ultimate
+implements, visualize algorithms

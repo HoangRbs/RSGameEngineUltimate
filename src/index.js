@@ -15,5 +15,5 @@ import 'main.css';
 import GARocket from './GARocket';
 
 let m_game = new GARocket();
-m_game.BuildCanvas(500, 400);
+m_game.BuildCanvas(600, 500);
 m_game.Start();
