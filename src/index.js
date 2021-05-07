@@ -11,3 +11,9 @@ import 'main.css';
 // let m_game = new GenAlgoUnicorn();
 // m_game.BuildCanvas(500, 400);
 // m_game.Start();
+
+import GARocket from './GARocket';
+
+let m_game = new GARocket();
+m_game.BuildCanvas(500, 400);
+m_game.Start();
