@@ -6,6 +6,7 @@ inside "TestGame/index.js"
 # -----------------------------------------------------------
 
 export default class TestGame extends RSGameEngine {
+    
     constructor() {
         super();
     }
