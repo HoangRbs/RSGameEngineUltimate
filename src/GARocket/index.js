@@ -1,17 +1,17 @@
 import RSGameEngine from '../RSGameEngine';
-import Rocket from './Rocket';
+import Population from './Population';
 
-export default class TestGame extends RSGameEngine {
+export default class GA_Rocket extends RSGameEngine {
     constructor() {
         super();
+        this.m_pop;
+        this.m_gameObject = [];
     }
 
     OnCreate() {
-        this.testRocket = new Rocket(this.m_canvasWidth / 2, this.m_canvasHeight - 40, this);
-
-        this.gameObjects = [
-            this.testRocket
-        ]
+        this.m_pop = new Population(this); 
+        this.gameObjects = [...this.m_pop.getRockets()];
+        
     }
 
     Update(deltaTime) {

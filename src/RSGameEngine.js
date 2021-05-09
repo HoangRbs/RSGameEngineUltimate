@@ -120,13 +120,24 @@ export default class RSGameEngine {
     }
 
     // angle must be radian
-    Rotate(x, y, w, h, angle) {
+    // x, y, w, h: position, size of the rect
+    // angle (radian): the angle of the rect where it's heading to (velocity vector angle)
+    FillRectAndRotate(x, y, w, h, angle, color = '#00f') {
         let center_x = x + w / 2;
         let center_y = y + h / 2;
 
         // Matrix transformation
         this.m_ctx.translate(center_x, center_y);
         this.m_ctx.rotate(angle);
+
+        // render 
+        this.m_ctx.fillStyle = color;
+        this.m_ctx.fillRect(-w/2, -h/2, w, h); // 0 - w/2, 0 - h/2
+
+        // reset angle after drawing rect for the next drawing turn
+        this.m_ctx.rotate(-angle);
+
+        // reset translate for the next drawing turn
         this.m_ctx.translate(-center_x, -center_y);
     }
 }
