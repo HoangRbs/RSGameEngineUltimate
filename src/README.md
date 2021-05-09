@@ -3,34 +3,34 @@ create a folder "src/TestGame"
 
 inside "src/TestGame/index.js"
 
-{
-    export default class TestGame extends RSGameEngine {
+```
+export default class TestGame extends RSGameEngine {
 
-        constructor() {
-            super();
-        }
+    constructor() {
+        super();
+    }
 
-        OnCreate() {
+    OnCreate() {
 
-            this.gameObjects = [
-            
-            ]
-        }
+        this.gameObjects = [
+        
+        ]
+    }
 
-        Update(deltaTime) {
-            this.gameObjects.forEach(ob => ob.update(deltaTime));
-        }
+    Update(deltaTime) {
+        this.gameObjects.forEach(ob => ob.update(deltaTime));
+    }
 
-        Render() {
-            this.gameObjects.forEach(ob => ob.render());
-        }
+    Render() {
+        this.gameObjects.forEach(ob => ob.render());
     }
 }
+```
 ## and then import it inside the outermost index.js file and run the game
 
 "src/index.js"
-{
-    let testGame = new TestGame();
-    testGame.BuildCanvas();
-    testGame.Start();
-}
+```
+let testGame = new TestGame();
+testGame.BuildCanvas();
+testGame.Start();
+```
