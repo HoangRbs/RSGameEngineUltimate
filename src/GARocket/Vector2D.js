@@ -1,3 +1,5 @@
+import * as utils from './utils';
+
 export default class Vector2D {
     constructor(x = 0, y = 0) {
         this.x = x;
@@ -30,5 +32,11 @@ export default class Vector2D {
         }
 
         throw new Error('headingAngle() requires type \" radian \" or \" degrees \"');
+    }
+
+    // randomize vector x, y from -100 to 100
+    static random2D () {
+        let new_vec = new Vector2D(utils.genRndInteger(-100, 100),utils.genRndInteger(-100, 100));
+        return new_vec;
     }
 }
