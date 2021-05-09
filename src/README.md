@@ -4,9 +4,9 @@ create a folder "TestGame"
 inside "TestGame/index.js"
 
 # -----------------------------------------------------------
-
+{
 export default class TestGame extends RSGameEngine {
-    
+
     constructor() {
         super();
     }
@@ -26,7 +26,7 @@ export default class TestGame extends RSGameEngine {
         this.gameObjects.forEach(ob => ob.render());
     }
 }
-
+}
 ## and then import it inside the outermost index.js file and run the game
 
 let testGame = new TestGame();
