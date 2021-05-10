@@ -11,10 +11,10 @@ export default class GA_Rocket extends RSGameEngine {
     OnCreate() {
         this.m_pop = new Population(this); 
         this.gameObjects = [...this.m_pop.getRockets()];
-        
     }
 
     Update(deltaTime) {
+        Population.updateGenesIndexCount();
         this.gameObjects.forEach(ob => ob.update(deltaTime));
     }
 

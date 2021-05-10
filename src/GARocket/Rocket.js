@@ -1,5 +1,7 @@
 import RSGameEngine from '../RSGameEngine';
 import Vector2D from './Vector2D';
+import Individual_DNA from './Individual_DNA';
+import Population from './Population';
 
 const rocketAnglePlus = Math.PI / 2; // since the head rocket is up direction and
                                  // the canvas transformation is 90 degree compare to that
@@ -10,20 +12,24 @@ export default class Rocket {
     constructor(x, y, /** @type {RSGameEngine} */ gameObj) {
         this.width = 10;
         this.height = 40;
-        this.color = '#f3a058';
+        this.color = 'rgba(189, 125, 9, 0.55)';
         this.m_game = gameObj;
 
         this.pos = new Vector2D(x, y);
-        this.vel = Vector2D.random2D();
-        // this.vel = new Vector2D(100, -100);
+        this.vel = new Vector2D();
         this.acc = new Vector2D();
 
-        this.state = {
-            velAngle: 0
-        }
+        this.individual_dna = new Individual_DNA();
+    }
+
+    applyForce (/** @type {Vector2D} */force) {
+        this.acc.x = force.x;
+        this.acc.y = force.y;
     }
 
     update(deltaTime) {
+        this.applyForce(this.individual_dna.genes[Population.genes_index_count]);
+
         this.vel.add(this.acc, deltaTime);
         this.pos.add(this.vel, deltaTime);
         this.acc.mult(0);

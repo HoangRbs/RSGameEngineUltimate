@@ -1,0 +1,1 @@
+# generate text using Genetic Algorithm
