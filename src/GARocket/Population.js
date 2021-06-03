@@ -15,6 +15,8 @@ export default class Population {
 
     getRockets () { return this.rockets; }
 
+    // global variables
+
     // run from 0 to Individual genes length
     // inside Rocket.js update ()
     static genes_index_count = 0; 
@@ -26,8 +28,5 @@ export default class Population {
     // inside index.js Update()
     static updateGenesIndexCount () {
         Population.genes_index_count++;
-        if (Population.isReachGenesLength()) {
-            Population.genes_index_count = 0;
-        }
     }
 }   

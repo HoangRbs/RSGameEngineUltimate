@@ -14,5 +14,6 @@ export default class Individual_DNA {
         }
     }
 
+    // global variable
     static genes_len = 200;
 }
