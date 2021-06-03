@@ -1,1 +1,1 @@
-# preparing for the coding interview
+# some of the most common algorithm and problems solving patterns

@@ -21,4 +21,5 @@ This boilerplate assumes all your app code lives in /src.
 
 
 # RSGameEngineJS ultimate
-implements, visualize algorithms
+- implements, visualize algorithms (in src/TestGame, src/GARocket, ...)
+- test and solve some common problem solving patterns (in src/AlgorithmDatastructure)
