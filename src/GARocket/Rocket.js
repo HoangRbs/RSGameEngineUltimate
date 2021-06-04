@@ -55,6 +55,7 @@ export default class Rocket {
     update(deltaTime) {
         if (utils.distanceOf(this.pos, this.m_game.target.pos) < 20) {
             this.reachTheTarget = true;
+            this.pos = this.m_game.target.pos;
         }
 
         this.applyForce(this.individual_dna.genes[Population.genes_index_count]);

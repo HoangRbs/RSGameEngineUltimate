@@ -32,6 +32,17 @@ export default class Individual_DNA {
         return new Individual_DNA(newGenes);
     }
 
+    mutation() {
+        for (let i = 0; i < Individual_DNA.genes_len; i++) {
+            if (utils.genRndFloat(0, 1) < Individual_DNA.mutationRate) {
+                this.genes[i] = Vector2D.random2D();
+
+                console.log("mutate cmnr");
+            }
+        }
+    }
+
     // global variable
     static genes_len = 250;
+    static mutationRate = 0.01;
 }

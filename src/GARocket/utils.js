@@ -5,6 +5,10 @@ export function genRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function genRndFloat(min, max) {
+    return (Math.random() * (max - min + 1)) + min;
+}
+
 // get random element from array
 export function getRandomEl(arr, arrSize) {
     function genRndInteger2(min, max) {

@@ -57,8 +57,9 @@ export default class Population {
             parentA_DNA = utils.getRandomEl(this.selectionPool, this.selectionPoolSize).individual_dna;
             parentB_DNA = utils.getRandomEl(this.selectionPool, this.selectionPoolSize).individual_dna;
             child_DNA = parentA_DNA.crossOver(parentB_DNA);
-            let newRocket = new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 40, this.m_game, child_DNA);
+            child_DNA.mutation();
 
+            let newRocket = new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 40, this.m_game, child_DNA);
             newRockets.push(newRocket);
         }
 
