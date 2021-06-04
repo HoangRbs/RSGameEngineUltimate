@@ -14,7 +14,7 @@ export default class Individual_DNA {
 
             for (let i = 0; i < Individual_DNA.genes_len; i++) {
                 this.genes[i] = Vector2D.random2D();
-                this.genes[i].mult(10); // random generated force is too small so scale to 10X
+                this.genes[i].mult(8); // random generated force is too small so scale to 10X
             }
         }
     }
@@ -33,5 +33,5 @@ export default class Individual_DNA {
     }
 
     // global variable
-    static genes_len = 200;
+    static genes_len = 250;
 }

@@ -21,6 +21,7 @@ export default class Rocket {
         this.acc = new Vector2D();
 
         this.fitness = 0; // fitness run from 0 --> 1
+        this.reachTheTarget = false;
 
         if (dna) this.individual_dna = dna;
         else this.individual_dna = new Individual_DNA();
@@ -32,6 +33,11 @@ export default class Rocket {
     }
 
     calFitness() {
+        if (this.reachTheTarget) {
+            this.fitness = 1;
+            return;
+        }
+
         this.fitness = 0.05;
 
         let disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
@@ -47,11 +53,17 @@ export default class Rocket {
     }
 
     update(deltaTime) {
+        if (utils.distanceOf(this.pos, this.m_game.target.pos) < 20) {
+            this.reachTheTarget = true;
+        }
+
         this.applyForce(this.individual_dna.genes[Population.genes_index_count]);
 
-        this.vel.add(this.acc, deltaTime);
-        this.pos.add(this.vel, deltaTime);
-        this.acc.mult(0);
+        if (!this.reachTheTarget) {
+            this.vel.add(this.acc, deltaTime);
+            this.pos.add(this.vel, deltaTime);
+            this.acc.mult(0);
+        }
     }
 
     render() {

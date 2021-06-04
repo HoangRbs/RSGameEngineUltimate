@@ -19,10 +19,16 @@ export default class Population {
     getRockets() { return this.rockets; }
 
     evaluate() {
+        let maxFitness = 0;
+
         // calculate fitness of all the rockets
         for (let i = 0; i < this.populationSize; i++) {
             this.rockets[i].calFitness();
+            if (this.rockets[i].fitness > maxFitness) maxFitness = this.rockets[i].fitness;
         }
+
+        // show max fitness to display
+        this.m_game.maxFitnessDisplay.changeText(`max fitness: ${maxFitness}`);
 
         // create selection pool, a pool to select parents
         this.selectionPool = []; // empty the pool again to select parents from each new generation

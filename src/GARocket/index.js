@@ -1,6 +1,7 @@
 import RSGameEngine from '../RSGameEngine';
 import Population from './Population';
 import Target from './Target';
+import TextDisplayEl from './TextDisplayEl';
 
 export default class GA_Rocket extends RSGameEngine {
     constructor() {
@@ -8,6 +9,9 @@ export default class GA_Rocket extends RSGameEngine {
         this.m_pop;
         this.target;
         this.m_gameObject = [];
+
+        // text display: not a gameObject, prepend to html when created
+        this.maxFitnessDisplay = new TextDisplayEl("max fitness: ");
     }
 
     OnCreate() {
