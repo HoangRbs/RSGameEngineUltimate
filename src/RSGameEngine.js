@@ -58,9 +58,10 @@ export default class RSGameEngine {
         this.m_canvas.width = canvasWidth || CANVAS_WIDTH;
         this.m_canvas.height = canvasHeight || CANVAS_HEIGHT;
 
-        // for performance 
+        // for performance ------------
         this.m_canvasWidth = canvasWidth;
         this.m_canvasHeight = canvasHeight;
+        // ----------------------------
 
         this.m_canvas.style.border = "1px solid black";
 
@@ -132,7 +133,7 @@ export default class RSGameEngine {
 
         // render 
         this.m_ctx.fillStyle = color;
-        this.m_ctx.fillRect(-w/2, -h/2, w, h); // 0 - w/2, 0 - h/2
+        this.m_ctx.fillRect(-w / 2, -h / 2, w, h); // 0 - w/2, 0 - h/2
 
         // reset angle after drawing rect for the next drawing turn
         this.m_ctx.rotate(-angle);

@@ -34,9 +34,12 @@ export default class Vector2D {
         throw new Error('headingAngle() requires type \" radian \" or \" degrees \"');
     }
 
+
+    // global functions -------------------------------------------------------------------------
+
     // randomize vector x, y from -100 to 100
-    static random2D () {
-        let new_vec = new Vector2D(utils.genRndInteger(-100, 100),utils.genRndInteger(-100, 100));
+    static random2D() {
+        let new_vec = new Vector2D(utils.genRndInteger(-100, 100), utils.genRndInteger(-100, 100));
         return new_vec;
     }
 }

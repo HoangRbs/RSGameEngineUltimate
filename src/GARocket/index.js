@@ -12,26 +12,31 @@ export default class GA_Rocket extends RSGameEngine {
 
     OnCreate() {
         this.m_pop = new Population(this);
-        this.target = new Target(this); 
+        this.target = new Target(this);
         this.gameObjects = [...this.m_pop.getRockets(), this.target];
     }
 
     // place this function inside a loop to create generations (put in the Update() function)
     StartGeneticAlgorithm() {
-        Population.updateGenesIndexCount();
+        Population.updateGenesIndexCount(); // update new force in each rocket for current frame
 
         if (Population.isReachGenesLength()) {
+            // genetic algorithm process 
+            // only do the process when the rocket goes through all the genes
+            // and evaluate rockets' final positions to the target 
+            this.m_pop.evaluate();
+            this.m_pop.naturalSelection();
+
             Population.genes_index_count = 0;
 
-            // regerarate with a new population
-            this.m_pop = new Population(this);
+            // import into gameObjects to update and render
             this.gameObjects = [...this.m_pop.getRockets(), this.target];
         }
     }
 
     Update(deltaTime) {
-        this.StartGeneticAlgorithm();
         this.gameObjects.forEach(ob => ob.update(deltaTime));
+        this.StartGeneticAlgorithm();
     }
 
     Render() {

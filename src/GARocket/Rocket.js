@@ -1,15 +1,16 @@
-import RSGameEngine from '../RSGameEngine';
 import Vector2D from './Vector2D';
 import Individual_DNA from './Individual_DNA';
 import Population from './Population';
+import * as utils from './utils';
+import GA_Rocket from '.';
 
 const rocketAnglePlus = Math.PI / 2; // since the head rocket is up direction and
-                                 // the canvas transformation is 90 degree compare to that
-                                 // the rotation transformation must + this angle so 
-                                 // the canvas to rotate the rocket properly
+// the canvas transformation is 90 degree compare to that
+// the rotation transformation must + this angle so 
+// the canvas to rotate the rocket properly
 
 export default class Rocket {
-    constructor(x, y, /** @type {RSGameEngine} */ gameObj) {
+    constructor(x, y, /** @type {GA_Rocket} */ gameObj, dna) {
         this.width = 10;
         this.height = 40;
         this.color = 'rgba(189, 125, 9, 0.55)';
@@ -19,12 +20,30 @@ export default class Rocket {
         this.vel = new Vector2D();
         this.acc = new Vector2D();
 
-        this.individual_dna = new Individual_DNA();
+        this.fitness = 0; // fitness run from 0 --> 1
+
+        if (dna) this.individual_dna = dna;
+        else this.individual_dna = new Individual_DNA();
     }
 
-    applyForce (/** @type {Vector2D} */force) {
+    applyForce(/** @type {Vector2D} */force) {
         this.acc.x = force.x;
         this.acc.y = force.y;
+    }
+
+    calFitness() {
+        this.fitness = 0.05;
+
+        let disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
+
+        // if distance is greater than canvas height -> fitness ~~ 0
+        if (disToTarget < this.m_game.m_canvasHeight) {
+            // after scale: distance = 500 close to 600 --> then scale = 0.9
+            // --> fitness = 1 - 0.9 = 0.1;
+            this.fitness = 1 - utils.scaleNumberInRange(disToTarget, 0, this.m_game.m_canvasHeight, 0, 1);
+        }
+
+        // console.log('distance: ', disToTarget);
     }
 
     update(deltaTime) {
