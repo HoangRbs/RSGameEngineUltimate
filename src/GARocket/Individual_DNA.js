@@ -36,8 +36,6 @@ export default class Individual_DNA {
         for (let i = 0; i < Individual_DNA.genes_len; i++) {
             if (utils.genRndFloat(0, 1) < Individual_DNA.mutationRate) {
                 this.genes[i] = Vector2D.random2D();
-
-                console.log("mutate cmnr");
             }
         }
     }
