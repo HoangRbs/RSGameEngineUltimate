@@ -37,7 +37,7 @@ export default class Vector2D {
 
     // global functions -------------------------------------------------------------------------
 
-    // randomize vector x, y from -100 to 100
+    // randomize vector x, y from -100 to 100, |+-100| is the maximum magnitude
     static random2D() {
         let new_vec = new Vector2D(utils.genRndInteger(-100, 100), utils.genRndInteger(-100, 100));
         return new_vec;

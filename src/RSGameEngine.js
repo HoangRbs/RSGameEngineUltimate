@@ -154,7 +154,7 @@ export default class RSGameEngine {
 
         // start the game loop
         // window.requestAnimationFrame(this.GameLoop.bind(this));
-        setInterval(this.GameLoop2.bind(this), 13);
+        setInterval(this.GameLoop2.bind(this), 16);
     }
 
     // other games inherit the RSGameEngine class
@@ -202,5 +202,17 @@ export default class RSGameEngine {
 
         // reset translate for the next drawing turn
         this.m_ctx.translate(-center_x, -center_y);
+    }
+
+    resetSystemTimer() {
+        this.currentTime = 0;
+        // try this with == 0 then the next frame
+        // the deltatime  = performance.now() - 0 will be far too high\
+        // -> make objects go into "space" :P
+        this.lastTime = performance.now();
+        this.deltaTime = 0;
+        this.elapsedTime = 0;
+        this.renderElapsedTime = 0;
+        this.frameCounter = 0;
     }
 }

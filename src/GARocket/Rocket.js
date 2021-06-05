@@ -15,15 +15,18 @@ export default class Rocket {
         this.height = 40;
         this.color = 'rgba(189, 125, 9, 0.55)';
         this.m_game = gameObj;
+        this.m_game_obstacles = this.m_game.obstacleObjects;
 
         this.pos = new Vector2D(x, y);
         this.vel = new Vector2D();
         this.acc = new Vector2D();
 
         this.fitness = 0; // fitness run from 0 --> 1
-        this.reachTheTarget = false;
-
         this.m_timerCount = 0; // to calculate the "time" it reaches the target, effects the fitness as well
+
+        this.reachTheTarget = false;
+        this.disToTarget;
+        this.crashed = false;
 
         if (dna) this.individual_dna = dna;
         else this.individual_dna = new Individual_DNA();
@@ -40,22 +43,54 @@ export default class Rocket {
         } else {
             this.fitness = 0.05;
 
-            let disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
+            this.disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
+            // console.log(this.disToTarget);
 
             // if distance is greater than canvas height -> fitness ~~ 0
-            if (disToTarget < this.m_game.m_canvasHeight) {
+            if (this.disToTarget < this.m_game.m_canvasHeight) {
                 // after scale: distance = 500 close to 600 --> then scale = 0.9
                 // --> fitness = 1 - 0.9 = 0.1;
-                this.fitness = 1 - utils.scaleNumberInRange(disToTarget, 0, this.m_game.m_canvasHeight, 0, 1);
+                this.fitness = 1 - utils.scaleNumberInRange(this.disToTarget, 0, this.m_game.m_canvasHeight, 0, 1);
             }
         }
 
         // timer reaching the target effects the fitness
         // this.fitness -= this.m_timerCount / 3000;
         // if (this.fitness < 0) this.fitness = 0;
+
+        // crashed effects the fitness
+        if (this.crashed) {
+            if (this.disToTarget <= 165 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (9 / 10);
+            else if (this.disToTarget <= 190 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (6 / 10);
+            else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (5 / 10);
+            else this.fitness *= (1 / 10);
+        }
+    }
+
+    checkCollideWithObstacles() {
+        for (let obstacle of this.m_game_obstacles) {
+            // collide with obstacles
+            if (this.pos.x > obstacle.pos.x
+                && this.pos.x < obstacle.pos.x + obstacle.width
+                && this.pos.y > obstacle.pos.y
+                && this.pos.y < obstacle.pos.y + obstacle.height) {
+
+                this.crashed = true;
+            }
+
+            if (this.pos.x < 0 || this.pos.x + this.width > this.m_game.m_canvasWidth) {
+                this.crashed = true;
+            }
+
+            if (this.pos.y < 0 || this.pos.y + this.height > this.m_game.m_canvasHeight) {
+                this.crashed = true;
+            }
+        }
     }
 
     update(deltaTime) {
+        this.checkCollideWithObstacles();
+
         if (utils.distanceOf(this.pos, this.m_game.target.pos) < 20) {
             this.reachTheTarget = true;
             this.pos = this.m_game.target.pos;
@@ -63,7 +98,7 @@ export default class Rocket {
 
         this.applyForce(this.individual_dna.genes[Population.genes_index_count]);
 
-        if (!this.reachTheTarget) {
+        if (!this.reachTheTarget && !this.crashed) {
             this.vel.add(this.acc, deltaTime);
             this.pos.add(this.vel, deltaTime);
             this.acc.mult(0);

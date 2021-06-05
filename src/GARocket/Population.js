@@ -10,25 +10,26 @@ export default class Population {
         this.m_game = gameObj;
         this.selectionPool = [];
         this.selectionPoolSize = 0;
+        this.maxFitness = 0;
 
         for (let i = 0; i < this.populationSize; i++) {
-            this.rockets[i] = new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 40, this.m_game);
+            this.rockets[i] = new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 80, this.m_game);
         }
     }
 
     getRockets() { return this.rockets; }
 
     evaluate() {
-        let maxFitness = 0;
+        this.maxFitness = 0;
 
         // calculate fitness of all the rockets
         for (let i = 0; i < this.populationSize; i++) {
             this.rockets[i].calFitness();
-            if (this.rockets[i].fitness > maxFitness) maxFitness = this.rockets[i].fitness;
+            if (this.rockets[i].fitness > this.maxFitness) this.maxFitness = this.rockets[i].fitness;
         }
 
         // show max fitness to display
-        this.m_game.maxFitnessDisplay.changeText(`max fitness: ${maxFitness}`);
+        this.m_game.maxFitnessDisplay.changeText(`max fitness: ${this.maxFitness}`);
 
         // create selection pool, a pool to select parents
         this.selectionPool = []; // empty the pool again to select parents from each new generation
@@ -36,6 +37,12 @@ export default class Population {
 
         for (let i = 0; i < this.populationSize; i++) {
             let n = this.rockets[i].fitness * 100;
+
+            if (this.rockets[i].fitness >= 0.4) n += 10;
+            if (this.rockets[i].fitness >= 0.7) n += 5;
+            if (this.rockets[i].fitness >= 0.8) n += 10;
+            if (this.rockets[i].fitness >= 0.95) n += 10;
+            if (this.rockets[i].fitness == 1) n += 90;
 
             for (let j = 0; j < n; j++) {
                 this.selectionPool.push(this.rockets[i]);
@@ -57,9 +64,9 @@ export default class Population {
             parentA_DNA = utils.getRandomEl(this.selectionPool, this.selectionPoolSize).individual_dna;
             parentB_DNA = utils.getRandomEl(this.selectionPool, this.selectionPoolSize).individual_dna;
             child_DNA = parentA_DNA.crossOver(parentB_DNA);
-            child_DNA.mutation();
+            child_DNA.mutation(this.maxFitness);
 
-            let newRocket = new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 40, this.m_game, child_DNA);
+            let newRocket = new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 80, this.m_game, child_DNA);
             newRockets.push(newRocket);
         }
 
