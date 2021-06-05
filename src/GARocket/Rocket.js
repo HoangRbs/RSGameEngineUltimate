@@ -65,7 +65,7 @@ export default class Rocket {
             else if (this.disToTarget <= 190 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 100) this.fitness *= (9 / 10);
             else if (this.disToTarget <= 190 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (95 / 10);
             else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 100) this.fitness *= (8 / 10);
-            else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (65 / 10);
+            else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (85 / 10);
             else this.fitness *= (1 / 10);
         }
     }
