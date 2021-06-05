@@ -23,6 +23,8 @@ export default class Rocket {
         this.fitness = 0; // fitness run from 0 --> 1
         this.reachTheTarget = false;
 
+        this.m_timerCount = 0; // to calculate the "time" it reaches the target, effects the fitness as well
+
         if (dna) this.individual_dna = dna;
         else this.individual_dna = new Individual_DNA();
     }
@@ -35,21 +37,22 @@ export default class Rocket {
     calFitness() {
         if (this.reachTheTarget) {
             this.fitness = 1;
-            return;
+        } else {
+            this.fitness = 0.05;
+
+            let disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
+
+            // if distance is greater than canvas height -> fitness ~~ 0
+            if (disToTarget < this.m_game.m_canvasHeight) {
+                // after scale: distance = 500 close to 600 --> then scale = 0.9
+                // --> fitness = 1 - 0.9 = 0.1;
+                this.fitness = 1 - utils.scaleNumberInRange(disToTarget, 0, this.m_game.m_canvasHeight, 0, 1);
+            }
         }
 
-        this.fitness = 0.05;
-
-        let disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
-
-        // if distance is greater than canvas height -> fitness ~~ 0
-        if (disToTarget < this.m_game.m_canvasHeight) {
-            // after scale: distance = 500 close to 600 --> then scale = 0.9
-            // --> fitness = 1 - 0.9 = 0.1;
-            this.fitness = 1 - utils.scaleNumberInRange(disToTarget, 0, this.m_game.m_canvasHeight, 0, 1);
-        }
-
-        // console.log('distance: ', disToTarget);
+        // timer reaching the target effects the fitness
+        // this.fitness -= this.m_timerCount / 3000;
+        // if (this.fitness < 0) this.fitness = 0;
     }
 
     update(deltaTime) {
@@ -64,6 +67,8 @@ export default class Rocket {
             this.vel.add(this.acc, deltaTime);
             this.pos.add(this.vel, deltaTime);
             this.acc.mult(0);
+
+            this.m_timerCount++;
         }
     }
 

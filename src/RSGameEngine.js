@@ -39,10 +39,23 @@ const CANVAS_HEIGHT = 500;
 
 export default class RSGameEngine {
     constructor() {
-        this.canvasWidth = CANVAS_WIDTH;
-        this.canvasHeight = CANVAS_HEIGHT;
+        // default width, height
+        this.m_canvasWidth = CANVAS_WIDTH;
+        this.m_canvasHeight = CANVAS_HEIGHT;
+
+        this.m_canvas;
+        this.m_ctx;
+
+        this.currentTime = 0;
         this.lastTime = 0;
         this.deltaTime = 0;
+
+        this.FPS = 70; // limit system frame per sec = 60, 70, ....
+        this.renderTimePerFrame = 1 / this.FPS; // number of seconds in a frame
+        this.frameCounter = 0; // real system fps performance
+
+        this.elapsedTime = 0;  // to show fps when it reaches 1 second
+        this.renderElapsedTime = 0; // to render only when it reaches amount of time per frame
     }
 
     BuildCanvas(canvasWidth, canvasHeight) {
@@ -64,35 +77,84 @@ export default class RSGameEngine {
         // ----------------------------
 
         this.m_canvas.style.border = "1px solid black";
-
-
         document.body.prepend(this.m_canvas);
     }
+
 
     // because GameLoop is a callback function , use it as arrow function so the "this" keyword
     // refers to the nearest object which is the RSGameEngine class
     // or use bind() function in the Start function
-    GameLoop(timestamp) {
 
-        this.deltaTime = (timestamp - this.lastTime) / 1000;
-        this.lastTime = timestamp;
+    // GameLoop(timestamp) {
 
-        this.m_ctx.clearRect(0, 0, this.m_canvasWidth, this.m_canvasHeight);
+    //     this.deltaTime = (timestamp - this.lastTime) / 1000;    // second
+    //     this.lastTime = timestamp;
+
+    //     this.elapsedTime += this.deltaTime; // to show real fps
+    //     this.renderElapsedTime = + this.deltaTime;   // to render only when it reaches amount of time per frame
+
+    //     this.m_ctx.clearRect(0, 0, this.m_canvasWidth, this.m_canvasHeight);
+
+    //     if (this.renderElapsedTime >= this.renderTimePerFrame) {
+    //         // the incease in value like position or velocity must multiply DELTA TIME
+    //         // the purpose of delta time is used in more powerful machine and weaker machine 
+    //         // but the movement of vel/pos still perform the same
+    //         this.Update(this.deltaTime);
+    //         this.Render();
+    //         this.renderElapsedTime = 0;
+    //     }
+
+
+    //     if (this.elapsedTime >= 1) { // display fps every second
+    //         // console.log('FPS: ', this.frameCounter);
+    //         this.frameCounter = 0;
+    //         this.elapsedTime = 0;
+    //     }
+
+    //     this.frameCounter++;
+
+    //     requestAnimationFrame(this.GameLoop.bind(this));
+    // }
+
+    // arrow function so the "this" keyword
+    // refers to the nearest object which is the RSGameEngine class
+    GameLoop2() {
+        this.currentTime = performance.now();
+        this.deltaTime = (this.currentTime - this.lastTime) / 1000;    // second
+        this.lastTime = this.currentTime;
+
+        this.elapsedTime += this.deltaTime; // to show real fps
+        this.renderElapsedTime += this.deltaTime;   // to render only when it reaches amount of time per frame
 
         // the incease in value like position or velocity must multiply DELTA TIME
         // the purpose of delta time is used in more powerful machine and weaker machine 
         // but the movement of vel/pos still perform the same
         this.Update(this.deltaTime);
-        this.Render();
 
-        requestAnimationFrame(this.GameLoop.bind(this));
+        if (this.renderElapsedTime >= this.renderTimePerFrame) {
+
+            this.m_ctx.clearRect(0, 0, this.m_canvasWidth, this.m_canvasHeight);
+            this.Render();
+
+            this.renderElapsedTime = 0;
+        }
+
+        if (this.elapsedTime >= 1) { // display fps every second
+            // console.log('FPS: ', this.frameCounter);
+            this.frameCounter = 0;
+            this.elapsedTime = 0;
+        }
+
+        this.frameCounter++;
     }
 
     Start() {
+        // call game resource initialization that inherits this class
         this.OnCreate();
 
         // start the game loop
-        window.requestAnimationFrame(this.GameLoop.bind(this));
+        // window.requestAnimationFrame(this.GameLoop.bind(this));
+        setInterval(this.GameLoop2.bind(this), 13);
     }
 
     // other games inherit the RSGameEngine class
