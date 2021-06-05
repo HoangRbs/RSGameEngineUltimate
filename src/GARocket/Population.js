@@ -38,10 +38,11 @@ export default class Population {
         for (let i = 0; i < this.populationSize; i++) {
             let n = this.rockets[i].fitness * 100;
 
-            if (this.rockets[i].fitness >= 0.4) n += 10;
-            if (this.rockets[i].fitness >= 0.7) n += 5;
-            if (this.rockets[i].fitness >= 0.8) n += 10;
-            if (this.rockets[i].fitness >= 0.95) n += 10;
+            if (this.rockets[i].fitness >= 0.4) n += 5;
+            if (this.rockets[i].fitness >= 0.7) n += 10;
+            if (this.rockets[i].fitness >= 0.75) n += 20;
+            if (this.rockets[i].fitness >= 0.80) n += 30;
+            if (this.rockets[i].fitness >= 0.85) n += 40;
             if (this.rockets[i].fitness == 1) n += 90;
 
             for (let j = 0; j < n; j++) {

@@ -60,31 +60,40 @@ export default class Rocket {
 
         // crashed effects the fitness
         if (this.crashed) {
-            if (this.disToTarget <= 165 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (9 / 10);
-            else if (this.disToTarget <= 190 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (6 / 10);
-            else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (5 / 10);
+            if (this.disToTarget <= 165 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 100) this.fitness *= (7 / 10);
+            else if (this.disToTarget <= 165 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (9 / 10);
+            else if (this.disToTarget <= 190 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 100) this.fitness *= (6 / 10);
+            else if (this.disToTarget <= 190 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (8 / 10);
+            else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 100) this.fitness *= (5 / 10);
+            else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (6 / 10);
             else this.fitness *= (1 / 10);
         }
     }
 
     checkCollideWithObstacles() {
+        // collide with obstacles
+        let center_x = this.pos.x + this.width / 2;
+        let center_y = this.pos.y + this.height / 2;
+
         for (let obstacle of this.m_game_obstacles) {
-            // collide with obstacles
-            if (this.pos.x > obstacle.pos.x
-                && this.pos.x < obstacle.pos.x + obstacle.width
-                && this.pos.y > obstacle.pos.y
-                && this.pos.y < obstacle.pos.y + obstacle.height) {
+
+            if (center_x > obstacle.pos.x
+                && center_x < obstacle.pos.x + obstacle.width
+                && center_y > obstacle.pos.y
+                && center_y < obstacle.pos.y + obstacle.height) {
 
                 this.crashed = true;
             }
 
-            if (this.pos.x < 0 || this.pos.x + this.width > this.m_game.m_canvasWidth) {
-                this.crashed = true;
-            }
+        }
 
-            if (this.pos.y < 0 || this.pos.y + this.height > this.m_game.m_canvasHeight) {
-                this.crashed = true;
-            }
+        // collide with walls
+        if (this.pos.x < 0 || this.pos.x + this.width > this.m_game.m_canvasWidth) {
+            this.crashed = true;
+        }
+
+        if (this.pos.y < 0 || this.pos.y + this.height > this.m_game.m_canvasHeight) {
+            this.crashed = true;
         }
     }
 
