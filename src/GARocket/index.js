@@ -22,8 +22,12 @@ export default class GA_Rocket extends RSGameEngine {
     }
 
     OnCreate() {
-        this.obstacleObjects.push(new Obstacle(0, 250, 300, 20, this));
-        this.obstacleObjects.push(new Obstacle(320, 100, 320, 20, this));
+        // many obstacles
+        // this.obstacleObjects.push(new Obstacle(0, 250, 300, 20, this));
+        // this.obstacleObjects.push(new Obstacle(320, 100, 320, 20, this));
+
+        // only one obstacles
+        this.obstacleObjects.push(new Obstacle(100, 250, 320, 20, this));
 
         this.m_pop = new Population(this);
         this.target = new Target(this);
