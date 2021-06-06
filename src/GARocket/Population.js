@@ -43,7 +43,7 @@ export default class Population {
             if (this.rockets[i].fitness >= 0.75) n += 20;
             if (this.rockets[i].fitness >= 0.80) n += 30;
             if (this.rockets[i].fitness >= 0.85) n += 40;
-            if (this.rockets[i].fitness == 1) n += 90;
+            if (this.rockets[i].fitness >= 0.90) n += 50;
 
             for (let j = 0; j < n; j++) {
                 this.selectionPool.push(this.rockets[i]);

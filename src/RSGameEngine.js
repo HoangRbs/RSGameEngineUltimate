@@ -152,9 +152,12 @@ export default class RSGameEngine {
         // call game resource initialization that inherits this class
         this.OnCreate();
 
+        // reset system timer to prevent delta time too high
+        this.resetSystemTimer();
+
         // start the game loop
         // window.requestAnimationFrame(this.GameLoop.bind(this));
-        setInterval(this.GameLoop2.bind(this), 16);
+        setInterval(this.GameLoop2.bind(this), 15);
     }
 
     // other games inherit the RSGameEngine class

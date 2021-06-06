@@ -37,9 +37,10 @@ export default class Individual_DNA {
 
         // the current fitness is too small still cannot be evoled in the next generations
         // make it easier to mutate
-        if (currentMaxFitness <= 0.4) tmp_rate = 0.18;
-        else if (currentMaxFitness <= 0.75) tmp_rate = 0.095;
-        else if (currentMaxFitness <= 0.85) tmp_rate = 0.1;
+        if (currentMaxFitness <= 0.2) tmp_rate = 0.5;
+        else if (currentMaxFitness <= 0.4) tmp_rate = 0.095;
+        else if (currentMaxFitness <= 0.75) tmp_rate = 0.05;
+        else if (currentMaxFitness <= 0.85) tmp_rate = 0.03;
 
         for (let i = 0; i < Individual_DNA.genes_len; i++) {
             if (utils.genRndFloat(0, 1) < tmp_rate) {

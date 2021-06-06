@@ -55,8 +55,8 @@ export default class Rocket {
         }
 
         // timer reaching the target effects the fitness
-        // this.fitness -= this.m_timerCount / 3000;
-        // if (this.fitness < 0) this.fitness = 0;
+        this.fitness -= this.m_timerCount / 3900;
+        if (this.fitness < 0) this.fitness = 0;
 
         // crashed effects the fitness
         if (this.crashed) {
@@ -88,11 +88,11 @@ export default class Rocket {
         }
 
         // collide with walls
-        if (this.pos.x < 0 || this.pos.x + this.width > this.m_game.m_canvasWidth) {
+        if (center_x < 0 || center_x > this.m_game.m_canvasWidth) {
             this.crashed = true;
         }
 
-        if (this.pos.y < 0 || this.pos.y + this.height > this.m_game.m_canvasHeight) {
+        if (center_y < 0 || center_y > this.m_game.m_canvasHeight) {
             this.crashed = true;
         }
     }
