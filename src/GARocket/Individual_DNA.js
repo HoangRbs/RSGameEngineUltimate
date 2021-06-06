@@ -1,7 +1,8 @@
 import Vector2D from './Vector2D';
 import * as utils from './utils';
 
-// Rocket Individual - Rocket DNA
+// Rocket Individual - Rocket DNA 
+// Infact this should be CHROMOSOME, and chromosome contains genes
 
 export default class Individual_DNA {
     constructor(genes) {
