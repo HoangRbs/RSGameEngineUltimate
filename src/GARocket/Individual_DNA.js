@@ -2,12 +2,11 @@ import Vector2D from './Vector2D';
 import * as utils from './utils';
 
 // Rocket Individual - Rocket DNA 
-// Infact this should be CHROMOSOME, and chromosome contains genes
 
 export default class Individual_DNA {
     constructor(genes) {
         if (genes) {
-            this.genes = genes;
+            this.genes = genes; // Infact this should be CHROMOSOME, and chromosome contains gene
         } else {
             // genes contains bunch of random force vector which push the rocket
             // a rocket will go through all force, a force each frame
