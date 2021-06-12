@@ -44,7 +44,6 @@ export default class Rocket {
             this.fitness = 0.05;
 
             this.disToTarget = utils.distanceOf(this.pos, this.m_game.target.pos);
-            // console.log(this.disToTarget);
 
             // if distance is greater than canvas height -> fitness ~~ 0
             if (this.disToTarget < this.m_game.m_canvasHeight) {
@@ -67,6 +66,8 @@ export default class Rocket {
             else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 100) this.fitness *= (8 / 10);
             else if (this.disToTarget <= 290 && Math.abs(this.pos.y - this.m_game.target.pos.y) <= 80) this.fitness *= (85 / 10);
             else this.fitness *= (1 / 10);
+
+            // redesign this later, different height will be calculated seperately
         }
     }
 

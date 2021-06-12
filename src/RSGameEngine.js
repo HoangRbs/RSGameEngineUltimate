@@ -116,8 +116,7 @@ export default class RSGameEngine {
     //     requestAnimationFrame(this.GameLoop.bind(this));
     // }
 
-    // arrow function so the "this" keyword
-    // refers to the nearest object which is the RSGameEngine class
+
     GameLoop2() {
         this.currentTime = performance.now();
         this.deltaTime = (this.currentTime - this.lastTime) / 1000;    // second
