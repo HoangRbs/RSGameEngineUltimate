@@ -2,7 +2,6 @@ import RSGameEngine from '../RSGameEngine';
 import Population from './Population';
 import Target from './Target';
 import TextDisplayEl from './TextDisplayEl';
-import Obstacle from './Obstacle';
 
 export default class GA_Rocket extends RSGameEngine {
     constructor() {
@@ -43,11 +42,19 @@ export default class GA_Rocket extends RSGameEngine {
         Population.updateGenesIndexCount(); // update new force in each rocket for current frame
 
         if (Population.isReachGenesLength()) {
-            // genetic algorithm process 
-            // only do the process when the rocket goes through all the genes
-            // and evaluate rockets' final positions to the target 
-            this.m_pop.evaluate();
-            this.m_pop.naturalSelection();
+
+            // only evolve if maxFitness is <= 0.94
+            if (this.m_pop.maxFitness <= 0.94) {
+                // genetic algorithm process 
+                // only do the process when the rocket goes through all the genes
+                // and evaluate rockets' final positions to the target 
+                this.m_pop.evaluate();
+                this.m_pop.naturalSelection();
+            } else {
+                // restart rockets at their initial position but still keep the same genes
+                this.m_pop.restartRocketsState();
+                this.maxFitnessDisplay.changeText(`no evolve! keep the same fitness: ${this.m_pop.maxFitness}`);
+            }
 
             Population.genes_index_count = 0;
 

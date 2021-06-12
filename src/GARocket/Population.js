@@ -19,6 +19,16 @@ export default class Population {
 
     getRockets() { return this.rockets; }
 
+    restartRocketsState() {
+        // restart rockets States but not changing their dna
+        let newRockets = [];
+        for (let i = 0; i < this.populationSize; i++) {
+            newRockets.push(new Rocket(this.m_game.m_canvasWidth / 2, this.m_game.m_canvasHeight - 80, this.m_game, this.rockets[i].individual_dna));
+        }
+
+        this.rockets = newRockets;
+    }
+
     evaluate() {
         this.maxFitness = 0;
 
