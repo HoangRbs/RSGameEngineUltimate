@@ -7,5 +7,8 @@
 // import './Sorting';
 
 
-import './Interview';
+// import './Interview';
+
+import './HashTable';
+// import './Graphs';
 

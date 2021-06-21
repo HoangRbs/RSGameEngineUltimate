@@ -12,11 +12,11 @@ import 'main.css';
 // m_game.BuildCanvas(500, 400);
 // m_game.Start();
 
-import GARocket from './GARocket';
+// import GARocket from './GARocket';
 
-let m_game = new GARocket();
-m_game.BuildCanvas(600, 500);
-m_game.Start();
+// let m_game = new GARocket();
+// m_game.BuildCanvas(600, 500);
+// m_game.Start();
 
-// import AlDa from './AlgorithmDatastructure';
+import AlDa from './AlgorithmDatastructure';
 
