@@ -9,6 +9,6 @@
 
 // import './Interview';
 
-import './HashTable';
-// import './Graphs';
+// import './HashTable';
+import './Graphs';
 
