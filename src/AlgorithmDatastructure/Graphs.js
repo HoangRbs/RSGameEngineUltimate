@@ -33,6 +33,23 @@ class Graph {
 
         delete this.adjacencyList[vertex]; // delete object completely
     }
+
+    recursiveDFS(startVertex) {
+        let visited = {};
+        let result = [];
+        let adjacencyList = this.adjacencyList;
+
+        function dfs(vertex) {
+            visited[vertex] = true;
+            result.push(vertex);
+            for (let neighbor of adjacencyList[vertex]) {
+                if (!visited[neighbor]) dfs(neighbor);
+            }
+        }
+
+        dfs(startVertex);
+        console.log(result);
+    }
 }
 
 let mgraph = new Graph();
@@ -51,7 +68,9 @@ mgraph.addEdge("D", "E");
 mgraph.addEdge("D", "F");
 mgraph.addEdge("E", "F");
 
-console.log(mgraph.adjacencyList);
+// console.log(mgraph.adjacencyList);
+
+mgraph.recursiveDFS("A");
 
 /*
         A
