@@ -70,7 +70,7 @@ mgraph.addEdge("E", "F");
 
 // console.log(mgraph.adjacencyList);
 
-mgraph.recursiveDFS("A");
+// mgraph.recursiveDFS("A");
 
 /*
         A
@@ -81,4 +81,3 @@ mgraph.recursiveDFS("A");
     \      /
        F
 */
-
