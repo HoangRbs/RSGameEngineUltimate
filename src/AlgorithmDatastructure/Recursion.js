@@ -1,22 +1,22 @@
 // resursion helper method
 
 function collectOddValues(arr) {
-    let result = [];
+  let result = [];
 
-    // helper method that helps collect the odd
-    function helper(inputArr) {
-        if (!inputArr.length) return;
+  // helper method that helps collect the odd
+  function helper(inputArr) {
+    if (!inputArr.length) return;
 
-        if (inputArr[0] % 2 !== 0) {
-            result.push(inputArr[0]);
-        }
-
-        helper(inputArr.slice(1));
+    if (inputArr[0] % 2 !== 0) {
+      result.push(inputArr[0]);
     }
 
-    helper(arr);
+    helper(inputArr.slice(1));
+  }
 
-    return result;
+  helper(arr);
+
+  return result;
 }
 
 // console.log(collectOddValues([3, 9, 1, 2, 4, 7]));
@@ -24,18 +24,16 @@ function collectOddValues(arr) {
 // pure recursion -----------------------------
 
 function collectOddValues2(arr) {
-    let newArr = [];
+  let newArr = [];
 
-    if (!arr.length) return;
+  if (!arr.length) return;
 
-    if (arr[0] % 2 !== 0) {
-        newArr.push(arr[0]);
-    }
+  if (arr[0] % 2 !== 0) {
+    newArr.push(arr[0]);
+  }
 
-    newArr = newArr.concat(collectOddValues2(arr.slice(1)));
-    return newArr;
+  newArr = newArr.concat(collectOddValues2(arr.slice(1)));
+  return newArr;
 }
 
 // console.log(collectOddValues([3, 9, 1, 2, 4, 7]));
-
-

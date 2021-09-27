@@ -6,23 +6,21 @@
 // [-4, -3, -2, 0, 1, 2, 5, 6] --> [-2, 2]
 
 function sumZero(arr) {
-    left = 0;
-    right = arr.length - 1;
+  left = 0;
+  right = arr.length - 1;
 
-    while (left < right) {
-        let sum = arr[left] + arr[right];
-        if (sum == 0) {
-            return [arr[left], arr[right]];
-        }
-        else if (sum > 0) {
-            right--;
-        } else {
-            left++;
-        }
+  while (left < right) {
+    let sum = arr[left] + arr[right];
+    if (sum == 0) {
+      return [arr[left], arr[right]];
+    } else if (sum > 0) {
+      right--;
+    } else {
+      left++;
     }
+  }
 }
 
 // console.log(sumZero([-4, -3, -2, 0, 1, 5, 6]));
-
 
 // count Unique values
