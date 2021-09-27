@@ -7,6 +7,7 @@ import InputHandler from './InputHandler';
 export default class TestGame extends RSGameEngine {
     constructor() {
         super();
+        console.log("test git");
     }
 
     OnCreate() {
