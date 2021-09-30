@@ -205,8 +205,8 @@ export default class RSGameEngine {
 
   resetSystemTimer() {
     this.currentTime = 0;
-    // try this with == 0 then the next frame
-    // the deltatime  = performance.now() - 0 will be far too high\
+    // try this.lastTime == 0 then the next frame
+    // the deltatime  = performance.now() - this.lastTime will be far too high\
     // -> make objects go into "space" :P
     this.lastTime = performance.now();
     this.deltaTime = 0;
