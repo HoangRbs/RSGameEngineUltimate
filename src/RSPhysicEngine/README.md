@@ -1,1 +1,1 @@
-# this is RS physic engine, is imported to RSGameEngine. It's not a game !!
+# this is RS physic engine, is used with RSGameEngine. It's not a game !!
