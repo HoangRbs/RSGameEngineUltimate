@@ -1,4 +1,4 @@
-import RSGameEngine from '../RSGameEngine';
+import RSGameEngine from '../../RSGameEngine';
 
 import Paddle from './Paddle';
 import Ball from './Ball';

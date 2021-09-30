@@ -1,7 +1,7 @@
 ## how to use game engine
-create a folder "src/TestGame"
+create a folder "src/testGames/TestGame"
 
-inside "src/TestGame/index.js"
+inside "src/testGames/TestGame/index.js"
 
 ```
 export default class TestGame extends RSGameEngine {
@@ -26,7 +26,7 @@ export default class TestGame extends RSGameEngine {
     }
 }
 ```
-## and then import it inside the outermost index.js file and run the game
+## and then import it inside the outermost index.js file src/index.js then run the game
 
 "src/index.js"
 ```
