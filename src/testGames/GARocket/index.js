@@ -1,4 +1,4 @@
-import RSGameEngine from '../RSGameEngine';
+import RSGameEngine from '../../RSGameEngine';
 import Population from './Population';
 import Target from './Target';
 import TextDisplayEl from './TextDisplayEl';

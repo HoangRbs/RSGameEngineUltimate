@@ -1,9 +1,9 @@
 // how to use game engine
 /*
-create a folder "TestGame"
-inside "TestGame/index.js"
+create a folder "src/testGames/TestGame"
+inside "src/testGames/TestGame/index.js"
 
-import RSGameEngine from '../RSGameEngine';
+import RSGameEngine from '../../RSGameEngine';
 
 export default class TestGame extends RSGameEngine {
     constructor() {
@@ -26,7 +26,7 @@ export default class TestGame extends RSGameEngine {
     }
 }
 
-and then import it inside the outermost index.js file and run the game
+and then import it inside the outermost index.js file src/index.js then run the game
 
 let testGame = new TestGame();
 testGame.BuildCanvas();

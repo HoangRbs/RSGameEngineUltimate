@@ -1,4 +1,4 @@
-import RSGameEngine from '../RSGameEngine';
+import RSGameEngine from '../../RSGameEngine';
 import Population from './Population';
 
 // generate unicorn text using genetic algorithm
