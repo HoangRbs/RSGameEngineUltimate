@@ -12,10 +12,16 @@ import 'main.css';
 // m_game.BuildCanvas(500, 400);
 // m_game.Start();
 
-import GARocket from './testGames/GARocket';
+// import GARocket from './testGames/GARocket';
 
-let m_game = new GARocket();
-m_game.BuildCanvas(600, 500);
-m_game.Start();
+// let m_game = new GARocket();
+// m_game.BuildCanvas(600, 500);
+// m_game.Start();
 
 // import AlDa from './testGames/AlgorithmDatastructure';
+
+import SimplePerceptron from './testGames/SimplePerceptron';
+
+let m_game = new SimplePerceptron();
+m_game.BuildCanvas(600, 500);
+m_game.Start();
