@@ -4,7 +4,8 @@ import Population from './Population';
 import * as utils from './utils';
 import GA_Rocket from '.';
 
-const rocketAnglePlus = Math.PI / 2; // since the head rocket is up direction and
+const rocketAnglePlus = Math.PI / 2;
+// since the head rocket is up direction as you set as default and
 // the canvas transformation is 90 degree compare to that
 // the rotation transformation must + this angle so
 // the canvas to rotate the rocket properly
