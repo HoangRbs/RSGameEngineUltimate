@@ -1,4 +1,5 @@
 import RSGameEngine from '../../RSGameEngine';
+import Perceptron from './Perceptron';
 
 export default class SimplePerceptron extends RSGameEngine {
   constructor() {
@@ -16,6 +17,10 @@ export default class SimplePerceptron extends RSGameEngine {
 
   OnCreate() {
     // this.importGameObjects();
+
+    let p = new Perceptron();
+    let inputs = [-1, 0.5];
+    console.log(p.guess(inputs));
   }
 
   Update(deltaTime) {
