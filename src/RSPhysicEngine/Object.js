@@ -1,4 +1,4 @@
-import { Vector2D } from './core';
+import Vector2D from './core/Vector2D';
 import RSGameEngine from '../RSGameEngine';
 
 export default class Object {
