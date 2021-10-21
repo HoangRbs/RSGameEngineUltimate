@@ -172,7 +172,7 @@ export default class RSGameEngine {
   }
   // -----------------------------------------------------------------------------------------
 
-  DrawLine (x1, y1, x2, y2) {
+  DrawLine(x1, y1, x2, y2) {
     this.m_ctx.moveTo(x1, y1);
     this.m_ctx.lineTo(x2, y2);
     this.m_ctx.stroke();
