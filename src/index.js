@@ -23,5 +23,5 @@ import 'main.css';
 import SimplePerceptron from './testGames/SimplePerceptron';
 
 let m_game = new SimplePerceptron();
-m_game.BuildCanvas(600, 500);
+m_game.BuildCanvas(600, 600);
 m_game.Start();

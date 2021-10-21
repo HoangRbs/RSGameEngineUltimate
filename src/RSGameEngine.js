@@ -172,6 +172,12 @@ export default class RSGameEngine {
   }
   // -----------------------------------------------------------------------------------------
 
+  DrawLine (x1, y1, x2, y2) {
+    this.m_ctx.moveTo(x1, y1);
+    this.m_ctx.lineTo(x2, y2);
+    this.m_ctx.stroke();
+  }
+
   DrawImage(imgEl, x, y, w, h) {
     this.m_ctx.drawImage(imgEl, x, y, w, h);
   }
@@ -206,7 +212,7 @@ export default class RSGameEngine {
   resetSystemTimer() {
     this.currentTime = 0;
     // try this.lastTime == 0 then the next frame
-    // the deltatime  = performance.now() - this.lastTime will be far too high\
+    // the deltatime = performance.now() - this.lastTime will be far too high\
     // -> make objects go into "space" :P
     this.lastTime = performance.now();
     this.deltaTime = 0;

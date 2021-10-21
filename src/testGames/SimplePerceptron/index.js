@@ -1,5 +1,6 @@
 import RSGameEngine from '../../RSGameEngine';
 import Perceptron from './Perceptron';
+import { Point } from './KnownData';
 
 export default class SimplePerceptron extends RSGameEngine {
   constructor() {
@@ -7,20 +8,23 @@ export default class SimplePerceptron extends RSGameEngine {
     this.m_gameObject = [];
   }
 
-  //   importGameObjects() {
-  //     this.gameObjects = [
-  //       ...this.m_pop.getRockets(),
-  //       this.target,
-  //       ...this.obstacleObjects,
-  //     ];
-  //   }
+    importGameObjects() { 
+        let points = new Array(100);
+        for (let i = 0; i < points.length; i++) {
+            points[i] = new Point(this);
+        }   
+
+        this.gameObjects = [
+            ...points
+      ];
+    }
 
   OnCreate() {
-    // this.importGameObjects();
+    this.importGameObjects();
 
     let p = new Perceptron();
     let inputs = [-1, 0.5];
-    console.log(p.guess(inputs));
+    // console.log(p.guess(inputs));
   }
 
   Update(deltaTime) {
@@ -28,6 +32,7 @@ export default class SimplePerceptron extends RSGameEngine {
   }
 
   Render() {
-    // this.gameObjects.forEach((ob) => ob.render());
+    this.DrawLine(0, 0, this.m_canvasWidth, this.m_canvasHeight);
+    this.gameObjects.forEach((ob) => ob.render());
   }
 }
