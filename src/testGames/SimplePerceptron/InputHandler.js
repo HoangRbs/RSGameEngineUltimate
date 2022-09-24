@@ -13,7 +13,7 @@ export default class InputHandler {
         case keys.right:
           break;
         case keys.enter:
-          enter_function_callback();    // pressing enter will trigger the callback function()
+          enter_function_callback(); // pressing enter will trigger the callback function()
           break;
       }
     });

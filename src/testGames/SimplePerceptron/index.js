@@ -1,6 +1,6 @@
 import RSGameEngine from '../../RSGameEngine';
 import Perceptron from './Perceptron';
-import { Point as KnownData } from './KnownData';
+import Point from './Point';
 import InputHandler from './InputHandler';
 
 export default class SimplePerceptron extends RSGameEngine {
@@ -13,7 +13,7 @@ export default class SimplePerceptron extends RSGameEngine {
   importGameObjects() {
     let points = new Array(100);
     for (let i = 0; i < points.length; i++) {
-      points[i] = new KnownData(this);
+      points[i] = new Point(this);
     }
 
     this.points = [...points];
@@ -33,10 +33,13 @@ export default class SimplePerceptron extends RSGameEngine {
     // only guess and train when press enter key
     new InputHandler(() => {
       for (let i = 0; i < this.points.length; i++) {
-        let inputs = [this.points[i].x, this.points[i].y];
-        let desiredOutput = this.points[i].label;
-
+        let inputs = [this.points[i].x, this.points[i].y]; // coordinates of a point
         this.points[i].guessLabel = this.perceptron.guess(inputs);
+        // guessLabel is the unknown label that is trying to be trained to archive the known target "label"
+        // we'll display guess label color on the canvas, and see it change whenever we press enter to train.
+
+        // training guess label to be like label (desired output)
+        let desiredOutput = this.points[i].label; // known data
         this.perceptron.train(inputs, desiredOutput);
       }
     });
