@@ -1,6 +1,6 @@
 import RSGameEngine from '../../RSGameEngine';
 import Perceptron from './Perceptron';
-import { Point } from './KnownData';
+import { Point as KnownData } from './KnownData';
 import InputHandler from './InputHandler';
 
 export default class SimplePerceptron extends RSGameEngine {
@@ -13,7 +13,7 @@ export default class SimplePerceptron extends RSGameEngine {
   importGameObjects() {
     let points = new Array(100);
     for (let i = 0; i < points.length; i++) {
-      points[i] = new Point(this);
+      points[i] = new KnownData(this);
     }
 
     this.points = [...points];
