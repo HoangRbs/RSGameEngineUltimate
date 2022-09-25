@@ -1,5 +1,6 @@
 import RSGameEngine from '../../RSGameEngine';
 import { genRndFloat } from '../../utils';
+import F from './LinearFunction';
 
 // a set of known datas as points that has been labeled
 
@@ -11,8 +12,8 @@ export default class Point {
     this.guessLabel = 0; // for visualize training process until it match with the target label above
     this.gameObj = gameObj;
 
-    // if x is below the y = x line then it's in label 'A' (known data)
-    if (this.x > this.y) this.label = 1;
+    // if the point is below F(x) line then it's in label 'A' (known data)
+    if (this.y < F(this.x)) this.label = 1;
     // label A
     else this.label = -1; // label B
   }

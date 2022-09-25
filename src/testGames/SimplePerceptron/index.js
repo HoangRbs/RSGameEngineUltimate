@@ -2,6 +2,7 @@ import RSGameEngine from '../../RSGameEngine';
 import Perceptron from './Perceptron';
 import Point from './Point';
 import InputHandler from './InputHandler';
+import F from './LinearFunction';
 
 export default class SimplePerceptron extends RSGameEngine {
   constructor() {
@@ -50,7 +51,12 @@ export default class SimplePerceptron extends RSGameEngine {
   }
 
   Render() {
-    this.DrawLine(0, 0, this.m_canvasWidth, this.m_canvasHeight);
+    let x1 = 25;
+    let y1 = F(x1);
+    let x2 = this.m_canvasWidth - 20;
+    let y2 = F(x2);
+
+    this.DrawLine(x1, y1, x2, y2);
     this.gameObjects.forEach((ob) => ob.render());
   }
 }
