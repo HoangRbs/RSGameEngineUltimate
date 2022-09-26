@@ -1,9 +1,9 @@
 import { genRndFloat } from '../../utils';
 
 export default class Perceptron {
-  constructor() {
-    this.weights = new Array(2);
-    this.learningRate = 0.1;
+  constructor(num) {
+    this.weights = new Array(num); // number of weights, could be 2, could be 3
+    this.learningRate = 0.09;
 
     // randomly init weights
     for (let i = 0; i < this.weights.length; i++) {

@@ -8,7 +8,8 @@ export default class Point {
   constructor(/** @type {RSGameEngine} */ gameObj) {
     this.x = genRndFloat(0, 500);
     this.y = genRndFloat(0, 500);
-    this.label; // Known data
+    this.bias = 1;
+    this.label = 0; // Known data
     this.guessLabel = 0; // for visualize training process until it match with the target label above
     this.gameObj = gameObj;
 
