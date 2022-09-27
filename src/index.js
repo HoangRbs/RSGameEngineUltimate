@@ -20,8 +20,14 @@ import 'main.css';
 
 // import AlDa from './testGames/AlgorithmDatastructure';
 
-import SimplePerceptron from './testGames/SimplePerceptron';
+// import SimplePerceptron from './testGames/SimplePerceptron';
 
-let m_game = new SimplePerceptron();
+// let m_game = new SimplePerceptron();
+// m_game.BuildCanvas(600, 600);
+// m_game.Start();
+
+import testRSNeuralNetwork from './testGames/testRSNeuralNetwork';
+
+let m_game = new testRSNeuralNetwork();
 m_game.BuildCanvas(600, 600);
 m_game.Start();
