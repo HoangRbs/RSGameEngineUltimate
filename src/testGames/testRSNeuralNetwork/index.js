@@ -16,41 +16,42 @@ export default class testRSNeuralNetwork extends RSGameEngine {
     // let m1 = new Matrix(3, 2);
     // let m2 = new Matrix(3, 2);
 
-    // m1.randommize();
-    // m2.randommize();
+    // m1.randommize(); m1.printMatrix();
+    // m2.randommize(); m2.printMatrix();
 
-    // console.table(m1.matrix);
-    // console.table(m2.matrix);
-
-    // console.table(m1.add(2).matrix);
+    // m1.add(m2);
+    // m1.printMatrix();
 
     // test multiply
     // let m1 = new Matrix(3, 2);
-    // let m2 = new Matrix(2, 4);
+    // let m2 = new Matrix(2, 2);
 
-    // m1.randommize();
-    // m2.randommize();
+    // m1.randommize(); m1.printMatrix();
+    // m2.randommize(); m2.printMatrix();
 
-    // console.table(m1.matrix);
-    // console.table(m2.matrix);
-
-    // console.table(m1.multiply(m2).matrix);
+    // m1.multiply(2); m1.printMatrix();
+    // Matrix.multiply(m1, m2).printMatrix();
 
     // test transpose
-    let m1 = new Matrix(3, 2);
-    m1.randommize();
-    console.table(m1.matrix);
-    console.table(m1.transpose().matrix);
+    // let m1 = new Matrix(3, 2);
+    // m1.randommize(); m1.printMatrix();
+    // m1.transpose().printMatrix();
+
+    //test map
+    // let m1 = new Matrix(3,2);
+    // m1.randommize(); m1.printMatrix();
+    // m1.map((x) => { return x * 2 });
+    // m1.printMatrix();
   }
 
   OnCreate() {
     this.importGameObjects();
 
-    //m1.multiply(2);
-    // console.table("m1", m1.matrix);
+    let nn = new RSNeuralNetwork(2, 2, 1); // 2 input, 2 hidden nodes, 1 output
 
-    //m1.add(m2);
-    // console.table("m1", m1.matrix);
+    let inputs = [1, 0];
+    let output = nn.feedForward(inputs);
+    console.log(output);
   }
 
   Update(deltaTime) {
