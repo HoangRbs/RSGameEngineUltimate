@@ -28,6 +28,7 @@ export default class RSNeuralNetwork {
     this.weights_bias_o.randommize(-1, 1);
   }
 
+  // guess
   feedForward(/** @type {Array} */ inputArray) {
     // ---------------- generating hidden outputs --------------------------
 
