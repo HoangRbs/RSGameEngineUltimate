@@ -30,24 +30,38 @@ export default class RSNeuralNetwork {
 
   // guess
   feedForward(/** @type {Array} */ inputArray) {
-    // ---------------- generating hidden outputs --------------------------
+    // ---------------- generating hidden layer results ------------ //
 
     // turn input into a matrix
-    let inputs = Matrix.fromArray(inputArray);
+    let inputMatrix = Matrix.fromArray(inputArray);
 
-    // calculate weighted sum matrix
-    let hiddenOutputs = Matrix.multiply(this.weights_ih, inputs);
-    hiddenOutputs.add(this.weights_bias_h);
+    // calculate weighted sum matrix in hidden layer
+    let hiddenMatrix = Matrix.multiply(this.weights_ih, inputMatrix);
+    hiddenMatrix.add(this.weights_bias_h);
 
     // activation function (step function)
-    hiddenOutputs.map(signmoid);
+    hiddenMatrix.map(signmoid);
 
-    // --------------- generating outputs layer from results of hidden layers ------------------
+    // --------------- generating output layer results...  --------- //
+    // --------------- ...from the results of hidden layers -------- //
 
-    let outputs = Matrix.multiply(this.weights_ho, hiddenOutputs); // weighted sum in output layer
-    outputs.add(this.weights_bias_o);
-    outputs.map(signmoid); // activation function
+    let outputMatrix = Matrix.multiply(this.weights_ho, hiddenMatrix); // weighted sum in output layer
+    outputMatrix.add(this.weights_bias_o);
+    outputMatrix.map(signmoid); // activation function
 
-    return outputs.toArray();
+    return outputMatrix.toArray();
+  }
+
+  train(inputArray, targetArray) {
+    let guessArray = this.feedForward(inputArray);
+
+    // calculate the Error: (error // cost function)
+    // ERROR = TARGETS - OUTPUTS
+    let targetMatrix = Matrix.fromArray(targetArray);
+    let guessMatrix = Matrix.fromArray(guessArray);
+
+    let errorMatrix = Matrix.substract(targetMatrix, guessMatrix);
+
+    console.table(errorMatrix);
   }
 }

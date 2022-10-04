@@ -35,7 +35,10 @@ export default class Perceptron {
 
     // tuning for new weights from error
     for (let i = 0; i < this.weights.length; i++) {
-      this.weights[i] += error * inputs[i] * this.learningRate; // new weight = old weight + delta_Weight
+      // new weight = old weight + delta_Weight
+      // delta weight is imagined almost like gradient descent
+      // so learning rate get you to the target slowly and steady
+      this.weights[i] += error * inputs[i] * this.learningRate;
     }
   }
 }

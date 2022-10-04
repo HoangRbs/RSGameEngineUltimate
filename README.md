@@ -1,6 +1,8 @@
 # RSGameEngineJS ultimate
 - implements, visualize algorithms (in src/TestGame, src/GARocket, ...)
 - test and solve some common problem solving patterns (in src/AlgorithmDatastructure)
+- simple Neural network library from scratch
+- all programs are for educational purpose 
 
 
 # project boilerplate thanks to webpack-babel-boilerplate

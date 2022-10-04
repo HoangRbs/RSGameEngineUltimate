@@ -50,8 +50,12 @@ export default class testRSNeuralNetwork extends RSGameEngine {
     let nn = new RSNeuralNetwork(2, 2, 1); // 2 input, 2 hidden nodes, 1 output
 
     let inputs = [1, 0];
-    let output = nn.feedForward(inputs);
-    console.log(output);
+    // let output = nn.feedForward(inputs);
+    // console.log(output);
+
+    let targets = [1];
+
+    nn.train(inputs, targets);
   }
 
   Update(deltaTime) {

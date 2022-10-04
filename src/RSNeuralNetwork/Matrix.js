@@ -60,8 +60,6 @@ export default class Matrix {
 
   static multiply(a, b) {
     // matrix, dot product
-
-    // if n is a Matrix object - type of n
     if (a instanceof Matrix && b instanceof Matrix) {
       if (a.cols !== b.rows) {
         console.log('cols of A must equal rows of B \n');
@@ -83,6 +81,29 @@ export default class Matrix {
 
       return result;
     }
+  }
+
+  static substract(a, b) {
+    // return a new matrix a - b
+
+    if (a instanceof Matrix && b instanceof Matrix) {
+      if (a.cols !== b.cols && a.rows !== b.rows) {
+        console.log('not the same size \n');
+        return undefined;
+      }
+
+      let result = new Matrix(a.rows, a.cols);
+
+      for (let i = 0; i < result.rows; i++) {
+        for (let j = 0; j < result.cols; j++) {
+          result.data[i][j] = a[i][j] - b[i][j];
+        }
+      }
+
+      return result;
+    }
+
+    return undefined;
   }
 
   transpose() {
