@@ -39,7 +39,7 @@ export default class Matrix {
         }
       }
 
-      return;
+      return this; // return this matrix as result for chain math operating
     }
 
     for (let i = 0; i < this.rows; i++) {
@@ -47,18 +47,38 @@ export default class Matrix {
         this.data[i][j] += n;
       }
     }
+
+    return this; // return this matrix as result for chain math operating
   }
 
   multiply(n) {
+    // hadamard product
+    if (n instanceof Matrix) {
+      if (n.rows !== this.rows && n.cols !== this.cols) {
+        console.log('cannot use hadamard product');
+        return undefined;
+      }
+
+      for (let i = 0; i < this.rows; i++) {
+        for (let j = 0; j < this.cols; j++) {
+          this.data[i][j] *= n.data[i][j];
+        }
+      }
+
+      return this;
+    }
+
     // scalar product
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
         this.data[i][j] *= n;
       }
     }
+
+    return this; // return this matrix as result for chain math operating
   }
 
-  static multiply(a, b) {
+  static multiply(/** @type {Matrix} */ a, /** @type {Matrix} */ b) {
     // matrix, dot product
     if (a instanceof Matrix && b instanceof Matrix) {
       if (a.cols !== b.rows) {
@@ -96,7 +116,7 @@ export default class Matrix {
 
       for (let i = 0; i < result.rows; i++) {
         for (let j = 0; j < result.cols; j++) {
-          result.data[i][j] = a[i][j] - b[i][j];
+          result.data[i][j] = a.data[i][j] - b.data[i][j];
         }
       }
 
@@ -127,6 +147,23 @@ export default class Matrix {
         this.data[i][j] = func(val);
       }
     }
+
+    return this;
+  }
+
+  static map(matrix, func) {
+    let result = new Matrix(matrix.rows, matrix.cols);
+
+    // apply function to every element of the matrix
+    // so later we can apply activation function to any element of the hidden weighted sum matrix
+    for (let i = 0; i < matrix.rows; i++) {
+      for (let j = 0; j < matrix.cols; j++) {
+        let val = matrix.data[i][j];
+        result.data[i][j] = func(val);
+      }
+    }
+
+    return result;
   }
 
   // convert an array into a matrix

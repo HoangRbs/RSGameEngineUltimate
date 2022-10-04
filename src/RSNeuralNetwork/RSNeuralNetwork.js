@@ -26,42 +26,91 @@ export default class RSNeuralNetwork {
     // weights bias output
     this.weights_bias_o = new Matrix(this.output_nodes, 1);
     this.weights_bias_o.randommize(-1, 1);
+
+    // input, hidden, output matrixes values
+    this.inputMatrix = new Matrix(this.input_nodes, 1);
+    this.hiddenMatrix = new Matrix(this.hidden_nodes, 1);
+    this.outputMatrix = new Matrix(this.output_nodes, 1);
+
+    this.learningRate = 0.1;
   }
 
   // guess
   feedForward(/** @type {Array} */ inputArray) {
+    // turn input into a matrix
+    this.inputMatrix = Matrix.fromArray(inputArray);
+
     // ---------------- generating hidden layer results ------------ //
 
-    // turn input into a matrix
-    let inputMatrix = Matrix.fromArray(inputArray);
-
     // calculate weighted sum matrix in hidden layer
-    let hiddenMatrix = Matrix.multiply(this.weights_ih, inputMatrix);
-    hiddenMatrix.add(this.weights_bias_h);
-
+    this.hiddenMatrix = Matrix.multiply(this.weights_ih, this.inputMatrix);
+    this.hiddenMatrix.add(this.weights_bias_h);
     // activation function (step function)
-    hiddenMatrix.map(signmoid);
+    this.hiddenMatrix.map(signmoid);
 
     // --------------- generating output layer results...  --------- //
     // --------------- ...from the results of hidden layers -------- //
 
-    let outputMatrix = Matrix.multiply(this.weights_ho, hiddenMatrix); // weighted sum in output layer
-    outputMatrix.add(this.weights_bias_o);
-    outputMatrix.map(signmoid); // activation function
+    // weighted sum in output layer
+    this.outputMatrix = Matrix.multiply(this.weights_ho, this.hiddenMatrix);
+    this.outputMatrix.add(this.weights_bias_o);
+    // activation function
+    this.outputMatrix.map(signmoid);
 
-    return outputMatrix.toArray();
+    return this.outputMatrix.toArray();
   }
 
   train(inputArray, targetArray) {
-    let guessArray = this.feedForward(inputArray);
-
-    // calculate the Error: (error // cost function)
-    // ERROR = TARGETS - OUTPUTS
+    this.feedForward(inputArray); // guessing --> will change the input, hidden and output matrixes
     let targetMatrix = Matrix.fromArray(targetArray);
-    let guessMatrix = Matrix.fromArray(guessArray);
 
-    let errorMatrix = Matrix.substract(targetMatrix, guessMatrix);
+    // --------------- back prop: output -> hidden --------------------------
+    // 1. difference between actual value and prediction OUTPUT_ERROR = TARGETS - OUTPUTS
+    let outputErrorsMatrix = Matrix.substract(targetMatrix, this.outputMatrix);
 
-    console.table(errorMatrix);
+    // 2. gradients = learningRate * Error * (O * (1 - O)) -- dsigmoid
+    let gradients = Matrix.map(this.outputMatrix, (x) => {
+      return x * (1 - x);
+    });
+
+    gradients.multiply(outputErrorsMatrix); // hadamard product
+    gradients.multiply(this.learningRate);
+
+    // 3. calculate delta weights = gradient * H_T --> weights += deltaWeight to change the weights
+    let weights_ho_deltas = Matrix.multiply(
+      // dot product
+      gradients,
+      this.hiddenMatrix.transpose()
+    );
+    this.weights_ho.add(weights_ho_deltas);
+
+    // 4. weights bias at output layer (no need the hidden since bias' hidden always == 1)
+    this.weights_bias_o.add(gradients);
+
+    // ---------------- back prop: input -> hidden ---------------------------
+    // 1. error function at hidden HIDDEN_ERROR = weights_ho_t * outputErrors;
+    let hiddenErrorsMatrix = Matrix.multiply(
+      // dot product
+      this.weights_ho.transpose(),
+      outputErrorsMatrix
+    );
+
+    // 2. gradient = learningRate * H_Error * (H * (1 - H)) -- dsigmoid
+    gradients = Matrix.map(this.hiddenMatrix, (x) => {
+      return x * (1 - x);
+    });
+    gradients.multiply(hiddenErrorsMatrix); // hadamard product
+    gradients.multiply(this.learningRate);
+
+    // 3. calculate delta weights = gradient * I_T --> weights += deltaWeight to change the weights
+    let weights_ih_deltas = Matrix.multiply(
+      // dot product
+      gradients,
+      this.inputMatrix.transpose()
+    );
+    this.weights_ih.add(weights_ih_deltas);
+
+    // 4. weights bias at hidden layer (no need the hidden since bias' hidden always == 1)
+    this.weights_bias_h.add(gradients);
   }
 }
