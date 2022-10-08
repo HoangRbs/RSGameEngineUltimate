@@ -26,8 +26,14 @@ import 'main.css';
 // m_game.BuildCanvas(600, 600);
 // m_game.Start();
 
-import testRSNeuralNetwork from './testGames/testRSNeuralNetwork';
+// import testRSNeuralNetwork from './testGames/testRSNeuralNetwork';
 
-let m_game = new testRSNeuralNetwork();
+// let m_game = new testRSNeuralNetwork();
+// m_game.BuildCanvas(600, 600);
+// m_game.Start();
+
+import DoodleClassification from './testGames/DoodleClassification';
+
+let m_game = new DoodleClassification();
 m_game.BuildCanvas(600, 600);
 m_game.Start();

@@ -82,37 +82,7 @@ export default class RSGameEngine {
 
   // because GameLoop is a callback function , use it as arrow function so the "this" keyword
   // refers to the nearest object which is the RSGameEngine class
-  // or use bind() function in the Start function
-
-  // GameLoop(timestamp) {
-
-  //     this.deltaTime = (timestamp - this.lastTime) / 1000;    // second
-  //     this.lastTime = timestamp;
-
-  //     this.elapsedTime += this.deltaTime; // to show real fps
-  //     this.renderElapsedTime = + this.deltaTime;   // to render only when it reaches amount of time per frame
-
-  //     this.m_ctx.clearRect(0, 0, this.m_canvasWidth, this.m_canvasHeight);
-
-  //     if (this.renderElapsedTime >= this.renderTimePerFrame) {
-  //         // the incease in value like position or velocity must multiply DELTA TIME
-  //         // the purpose of delta time is used in more powerful machine and weaker machine
-  //         // but the movement of vel/pos still perform the same
-  //         this.Update(this.deltaTime);
-  //         this.Render();
-  //         this.renderElapsedTime = 0;
-  //     }
-
-  //     if (this.elapsedTime >= 1) { // display fps every second
-  //         // console.log('FPS: ', this.frameCounter);
-  //         this.frameCounter = 0;
-  //         this.elapsedTime = 0;
-  //     }
-
-  //     this.frameCounter++;
-
-  //     requestAnimationFrame(this.GameLoop.bind(this));
-  // }
+  // or if not use arrow function , just use bind() function in the Start function
 
   GameLoop2() {
     this.currentTime = performance.now();
@@ -170,7 +140,20 @@ export default class RSGameEngine {
   OnCreate() {
     throw new Error('You have to implement the method onCreate()!');
   }
-  // -----------------------------------------------------------------------------------------
+
+  resetSystemTimer() {
+    this.currentTime = 0;
+    // try this.lastTime == 0 then the next frame
+    // the deltatime = performance.now() - this.lastTime will be far too high\
+    // -> make objects go into "space" :P
+    this.lastTime = performance.now();
+    this.deltaTime = 0;
+    this.elapsedTime = 0;
+    this.renderElapsedTime = 0;
+    this.frameCounter = 0;
+  }
+
+  // canvas, image pixels manipulation, drawing , ..... ---------------------------------------
 
   DrawLine(x1, y1, x2, y2) {
     this.m_ctx.moveTo(x1, y1);
@@ -209,15 +192,7 @@ export default class RSGameEngine {
     this.m_ctx.translate(-center_x, -center_y);
   }
 
-  resetSystemTimer() {
-    this.currentTime = 0;
-    // try this.lastTime == 0 then the next frame
-    // the deltatime = performance.now() - this.lastTime will be far too high\
-    // -> make objects go into "space" :P
-    this.lastTime = performance.now();
-    this.deltaTime = 0;
-    this.elapsedTime = 0;
-    this.renderElapsedTime = 0;
-    this.frameCounter = 0;
+  PutImageData(imageData, x, y) {
+    imageData !== null ? this.m_ctx.putImageData(imageData, x, y) : {};
   }
 }
