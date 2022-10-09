@@ -24,6 +24,9 @@ export function getRandomEl(arr, arrSize) {
 // and return it as an object containing the series of bytes.
 // credit: https://github.com/processing/p5.js/issues/2674
 
+// -------- example -----------
+// ({ bytes: inputImageDatas } = await loadBytes(inputFilePath));
+
 export function loadBytes(file) {
   return new Promise((resolve, reject) => {
     // async function
@@ -48,7 +51,11 @@ export function loadBytes(file) {
   });
 }
 
-// save bytes as binary data
+// ------- example -------------
+// let resultImagesData = new Int8Array(total * 784);
+// saveBytes(resultImagesData, 'test.bin');
+
+// save bytes Array as binary data
 export function saveBytes(data, fileName) {
   // to create a link with createElement.
   const a = document.createElement('a');
@@ -82,3 +89,17 @@ export function saveBytes(data, fileName) {
 
 // ------ example -------------
 // saveByteArray(sampleBytes, 'example.bin');
+
+// --------- example -----------------
+// let unshuffled = ['hello', 'a', 't', 'q', 1, 2, 3, {cats: true}]
+// shuffleArray(unshuffled);
+// console.log(unshuffled);
+
+export function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// --------------- create elements ----------------------

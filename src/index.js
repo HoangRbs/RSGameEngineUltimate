@@ -35,5 +35,5 @@ import 'main.css';
 import DoodleClassification from './testGames/DoodleClassification';
 
 let m_game = new DoodleClassification();
-m_game.BuildCanvas(600, 600);
+m_game.BuildCanvas(400, 400);
 m_game.Start();

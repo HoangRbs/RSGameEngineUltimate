@@ -165,6 +165,11 @@ export default class RSGameEngine {
     this.m_ctx.drawImage(imgEl, x, y, w, h);
   }
 
+  DrawText(text, size, x, y) {
+    this.m_ctx.font = `${size}px Arial`;
+    this.m_ctx.fillText(text, x, y);
+  }
+
   FillRect(x, y, w, h, color = '#00f') {
     this.m_ctx.fillStyle = color;
     this.m_ctx.fillRect(x, y, w, h);
