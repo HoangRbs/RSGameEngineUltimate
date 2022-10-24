@@ -6,7 +6,8 @@ export function genRndInteger(min, max) {
 }
 
 export function genRndFloat(min, max) {
-  let i = Math.random() * (max - min + 1) + min;
+  // with genrate float, not like Int, the value is not floored so we don't have to "+1"
+  let i = Math.random() * (max - min) + min;
   return i;
 }
 
@@ -18,6 +19,23 @@ export function getRandomEl(arr, arrSize) {
 
   let i = genRndInteger2(0, arrSize - 1);
   return arr[i];
+}
+
+// map value in a zone:
+// x = 50 in zone (0 ---> 600)
+// x = ?? in new zone (0 --> 1)
+export function scaleNumberInRange(valueIn, startIn, endIn, startOut, endOut) {
+  if (endIn <= startIn || endOut <= startOut) {
+    throw new Error('endIn must > startIn or endOut must > startOut');
+  }
+
+  if (valueIn > endIn || valueIn < startIn) {
+    throw new Error('value must >= startIn and <= endIn');
+  }
+
+  let outValue =
+    endOut - (endIn - valueIn) / ((endIn - startIn) / (endOut - startOut));
+  return outValue;
 }
 
 // The loadBytes() function is used to read the contents of a file or URL

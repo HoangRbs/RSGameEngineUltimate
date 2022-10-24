@@ -41,5 +41,5 @@ import 'main.css';
 import testTensorFlow from './testGames/testTensorFlow';
 
 let m_game = new testTensorFlow();
-m_game.BuildCanvas(400, 400);
+m_game.BuildCanvas(600, 600);
 m_game.Start();
