@@ -38,10 +38,10 @@ import 'main.css';
 // m_game.BuildCanvas(400, 400);
 // m_game.Start();
 
-// import testTensorFlow from './testGames/testTensorFlow';
+// import LinearRegressionTensorFlow from './testGames/LinearRegressionTensorFlow';
 
-// let m_game = new testTensorFlow();
-// m_game.BuildCanvas(600, 600);
+// let m_game = new LinearRegressionTensorFlow();
+// m_game.BuildCanvas(400, 400);
 // m_game.Start();
 
 import XOR_tensorflow from './testGames/XOR_tensorflow';

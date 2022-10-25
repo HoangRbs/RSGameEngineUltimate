@@ -112,12 +112,14 @@ export default class XOR_tensowflow extends RSGameEngine {
   Update(deltaTime) {
     // this.gameObjects.forEach((ob) => ob.update(deltaTime));
     if (!this.isTraining) {
-      this.train().then((res) => {
-        // complete training!
+      tf.tidy(() => {
+        this.train().then((res) => {
+          // complete training!
 
-        // the loss must be decreased overtime
-        // console.log(res.history.loss[0]);
-        this.isTraining = false;
+          // the loss must be decreased overtime
+          // console.log(res.history.loss[0]);
+          this.isTraining = false;
+        });
       });
     }
   }

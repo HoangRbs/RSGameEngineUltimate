@@ -2,7 +2,7 @@ import RSGameEngine from '../../RSGameEngine';
 import Point from './Point';
 import Line from './Line';
 
-export default class testTensorFlow extends RSGameEngine {
+export default class LinearRegressionTensorFlow extends RSGameEngine {
   constructor() {
     super();
   }
