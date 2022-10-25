@@ -168,6 +168,7 @@ export default class RSGameEngine {
 
   DrawText(text, size, x, y) {
     this.m_ctx.font = `${size}px Arial`;
+    this.m_ctx.fillStyle = 'blue';
     this.m_ctx.fillText(text, x, y);
   }
 

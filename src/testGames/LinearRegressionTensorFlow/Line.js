@@ -72,10 +72,6 @@ export default class Line {
     // so this will optimize those 2 values
     // note that m and b must be mutable variables.
     // read more at tensor flow js api: minimize()
-
-    // after training, m_tf and b_tf change, get datas from those values
-    this.m = this.m_tf.dataSync()[0];
-    this.b = this.b_tf.dataSync()[0];
   }
 
   // get input datas, mostly points

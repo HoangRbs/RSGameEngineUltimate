@@ -38,8 +38,14 @@ import 'main.css';
 // m_game.BuildCanvas(400, 400);
 // m_game.Start();
 
-import testTensorFlow from './testGames/testTensorFlow';
+// import testTensorFlow from './testGames/testTensorFlow';
 
-let m_game = new testTensorFlow();
-m_game.BuildCanvas(600, 600);
+// let m_game = new testTensorFlow();
+// m_game.BuildCanvas(600, 600);
+// m_game.Start();
+
+import XOR_tensorflow from './testGames/XOR_tensorflow';
+
+let m_game = new XOR_tensorflow();
+m_game.BuildCanvas(400, 400);
 m_game.Start();

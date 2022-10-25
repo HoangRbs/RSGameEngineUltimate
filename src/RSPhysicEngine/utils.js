@@ -6,7 +6,7 @@ export function genRndInteger(min, max) {
 }
 
 export function genRndFloat(min, max) {
-  let i = Math.random() * (max - min + 1) + min;
+  let i = Math.random() * (max - min) + min;
   return i;
 }
 
